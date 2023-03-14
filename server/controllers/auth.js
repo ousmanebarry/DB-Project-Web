@@ -1,3 +1,5 @@
+// https://www.youtube.com/watch?v=0aPLk2e2Z3g&t=4864s
+
 import { db } from "../db.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
