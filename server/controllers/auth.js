@@ -1,7 +1,7 @@
 import { db } from "../db.js";
 
 export const elogin = (req, res) => {
-	let q = "CALL Hotel_Chain_Test()";
+	let q = "CALL Employee_Login()";
 
 	db.query(q, (err, data) => {
 		if (err) return res.json(err);
