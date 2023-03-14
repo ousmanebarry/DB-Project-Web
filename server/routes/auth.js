@@ -1,13 +1,10 @@
 import express from "express";
+import { elogin, clogin } from "../controllers/auth.js";
 
 const router = express.Router();
 
-router.get("/eauth", (req, res) => {
-	res.json("Employee login");
-});
+router.get("/eauth", elogin);
 
-router.get("/cauth", (req, res) => {
-	res.json("Customer login");
-});
+router.get("/cauth", clogin);
 
 export default router;
