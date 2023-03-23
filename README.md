@@ -1,4 +1,4 @@
-# Configuration
+# Server Configuration
 
 Add a file named `.env` to the folder `/server`. Put in your local database connection information in this format `
 
