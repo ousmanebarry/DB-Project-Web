@@ -2,7 +2,7 @@
 
 Add a file named `.env` to the folder `/server`. Put in your local database connection information in this format `
 
-```
+```env
 host="localhost"
 user="<user>"
 password="<password>"
