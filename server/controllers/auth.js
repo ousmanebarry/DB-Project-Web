@@ -2,7 +2,7 @@ import db from "../db.js";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
-export const elogin = (req, res) => {
+export const login = (req, res) => {
 	let q = "CALL Employee_Login(?)";
 
 	db.query(q, req.body.username, (err, data) => {
@@ -20,7 +20,5 @@ export const elogin = (req, res) => {
 		console.log(data);
 	});
 };
-
-export const clogin = (req, res) => {};
 
 export const logout = (req, res) => {};

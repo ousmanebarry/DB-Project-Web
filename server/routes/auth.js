@@ -1,11 +1,9 @@
 import express from "express";
-import { elogin, clogin, logout } from "../controllers/auth.js";
+import { login, logout } from "../controllers/auth.js";
 
 const router = express.Router();
 
-router.get("/eauth", elogin);
-
-router.get("/cauth", clogin);
+router.get("/login", login);
 
 router.get("/logout", logout);
 
