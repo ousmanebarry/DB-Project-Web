@@ -3,21 +3,23 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
 export const login = (req, res) => {
-	let q = "CALL Employee_Login(?)";
+	let q = "CALL Customer_Login(?,?)";
 
-	db.query(q, req.body.username, (err, data) => {
-		if (err) return res.json(err);
+	const username = "test";
+	const password = "test";
+
+	console.log(req);
+
+	db.query(q, [username, password], (err, data) => {
+		if (err) return res.status(err.code).json(err);
 		if (data.length == 0) return res.status(404).json("User not found");
 
-		const isPasswordCorrect = bcrypt.compareSync(
-			req.body.passwod,
-			data[0].password
-		);
+		// const isPasswordCorrect = bcrypt.compareSync(password, data[0].password);
 
-		if (!isPasswordCorrect)
+		if (password != data[0][0].Password)
 			return res.status(400).json("Wrong username or password");
 
-		console.log(data);
+		res.json(data[0][0]);
 	});
 };
 
