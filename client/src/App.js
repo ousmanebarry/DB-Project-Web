@@ -28,29 +28,19 @@ function App() {
 			<UserContext.Provider value={{ user, setUser }}>
 				<Switch>
 					<Route exact path="/">
-						<Navbar
-							List={[
-								{ display: "Sign In", path: "/login" },
-								{ display: "Branches", path: "/branches" },
-							]}
-						/>
+						<Navbar List={[{ display: "Employee Sign In", path: "/login" }]} />
 						<HomePage />
 						<Footer />
 					</Route>
 
 					<Route exact path="/login">
-						<Navbar List={[{ display: "Home Page", path: "/Database" }]} />
+						<Navbar List={[{ display: "Home Page", path: "/" }]} />
 						<SignIn />
 						<Footer />
 					</Route>
 
 					<Route exact path="/booking">
-						<Navbar
-							List={[
-								{ display: "Home Page", path: "/" },
-								{ display: "Branches", path: "/branches" },
-							]}
-						/>
+						<Navbar List={[{ display: "Home Page", path: "/" }]} />
 						<Booking />
 						<Footer />
 					</Route>
