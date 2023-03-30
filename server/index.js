@@ -1,4 +1,5 @@
 import express from "express";
+import { verifyToken } from "./verify.js";
 import authRoutes from "./routes/auth.js";
 import customerRoutes from "./routes/customer.js";
 
