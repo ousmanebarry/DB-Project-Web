@@ -22,22 +22,22 @@ export const search = (req, res) => {
 };
 
 export const book = (req, res) => {
-	let q = "CALL Customer_Booking(?,?,?,?,?,?,?,?,?)";
+	let q = "CALL Customer_Booking(?,?,?,?,?,?,?,?,?,@Customer_ID)";
 
 	const name = req.body.name;
 	const address = req.body.address;
 	const sin = req.body.sin;
-	const regDate = req.body.regDate;
 	const roomId = req.body.roomId;
 	const hotelId = req.body.hotelId;
+	const price = req.body.price;
+	const regDate = new Date().toISOString().slice(0, 10); // req.body.regDate
 	const fday = req.body.fday;
 	const lday = req.body.lday;
-	const price = req.body.price;
 
 	db.query(
 		q,
 		[name, address, sin, regDate, roomId, hotelId, fday, lday, price],
-		(err, res) => {
+		(err) => {
 			if (err) res.json(err).status(404);
 
 			res.status(200);
