@@ -1,19 +1,19 @@
-import jwt from "jsonwebtoken";
-const secretKey = "my-secret-key";
+import db from "./db.js";
 
 export const verifyToken = (req, res, next) => {
-	const token = req.headers.authorization?.split(" ")[1];
+	const token = req.headers.authorization.split(" ")[1];
 
-	if (!token) {
-		return res.status(401).json({ message: "No token provided" });
-	}
+	db.query(
+		"SELECT * FROM token_blacklist WHERE token = ?",
+		[token],
+		(err, results) => {
+			if (err) return res.status(404).json(err);
 
-	jwt.verify(token, secretKey, (error, decoded) => {
-		if (error) {
-			return res.status(401).json({ message: "Invalid token" });
+			if (results[0].length > 0) {
+				res.status(401).json({ message: "Invalid token" });
+			} else {
+				next();
+			}
 		}
-
-		req.user = decoded;
-		next();
-	});
+	);
 };

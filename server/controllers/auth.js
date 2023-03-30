@@ -28,5 +28,10 @@ export const login = (req, res) => {
 };
 
 export const logout = (req, res) => {
-	res.json("Logged out").status(200);
+	const token = req.headers.authorization.split(" ")[1];
+
+	db.query("INSERT INTO token_blacklist (token) VALUES (?)", token, (err) => {
+		if (err) return res.status(404).json(err);
+		res.json("Logged out").status(200);
+	});
 };
