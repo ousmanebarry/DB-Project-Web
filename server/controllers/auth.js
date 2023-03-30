@@ -3,12 +3,30 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
 export const login = (req, res) => {
-	const username = req.body.username;
-	const password = req.body.password;
+	let q = "SELECT Password FROM USER WHERE Username=?";
+	const { username, password } = req.body;
+	const secretKey = "my-secret-key";
 
-	// const hashed_password = bcrypt.hashSync(password, 10);
+	db.query(q, username, (fErr, fResults) => {
+		if (fErr) return res.status(404).json(fErr);
 
-	return res.json({ username: username, password: password });
+		q = "CALL Employee_Login(?)";
+
+		db.query(q, username, (err, results) => {
+			if (err) return res.status(404).json(err);
+
+			const isLoggedIn = bcrypt.compareSync(password, fResults[0].Password);
+
+			if (results[0].length > 0 && isLoggedIn) {
+				const token = jwt.sign({ username }, secretKey, { expiresIn: "1h" });
+				res.json({ ...results[0], token });
+			} else {
+				res.status(401).json({ message: "Invalid credentials" });
+			}
+		});
+	});
 };
 
-export const logout = (req, res) => {};
+export const logout = (req, res) => {
+	res.json("Logged out").status(200);
+};
