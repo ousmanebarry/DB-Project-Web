@@ -8,7 +8,6 @@ import {
 	Redirect,
 } from "react-router-dom";
 import { useState } from "react";
-import Booking from "./components/CustomerView/Booking.js";
 import { UserContext } from "./Contexts/UserContext";
 import SignIn from "./components/signIn/signin";
 import HomePage from "./components/Home/home";
@@ -41,7 +40,6 @@ function App() {
 
 					<Route exact path="/booking">
 						<Navbar List={[{ display: "Home Page", path: "/" }]} />
-						<Booking />
 						<Footer />
 					</Route>
 

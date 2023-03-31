@@ -5,9 +5,13 @@ import { FaStar } from "react-icons/fa";
 const HomePage = (props) => {
 	const [show, setShow] = useState(false);
 	const [rooms, setRooms] = useState([]);
+	const [room, setRoom] = useState([]);
 
 	const handleClose = () => setShow(false);
-	const handleShow = () => setShow(true);
+	const handleShow = (idx) => {
+		setRoom(rooms[idx]);
+		setShow(true);
+	};
 
 	const [capacity, setCapacity] = useState("");
 	const [area, setArea] = useState("");
@@ -199,47 +203,73 @@ const HomePage = (props) => {
 				</Col>
 				<Col md={8}>
 					<Row>
-						{rooms.map((h) => {
-							return (
-								<Col md={6} lg={4} className="mb-4">
-									<Card>
-										<Card.Body>
-											<Card.Title>{`${h.Chain_Name} ${h.Category} Room #${h.Room_Number}`}</Card.Title>
-											<Card.Text>
-												<ul key={h.roomId}>
-													<li>Address: {h.Address}</li>
-													<li>Capacity: {h.Capacity}</li>
-													<li>Price: {h.Price}</li>
-													<li>Rating: {starArray(h.Price)}</li>
-												</ul>
-											</Card.Text>
-											<Button
-												variant="primary"
-												onClick={handleShow}
-												key={h.roomId}
-											>
-												More Info
-											</Button>
-										</Card.Body>
-									</Card>
-								</Col>
-							);
-						})}
+						{rooms.length !== 0 ? (
+							rooms.map((h, index) => {
+								return (
+									<Col md={6} lg={4} className="mb-4">
+										<Card>
+											<Card.Body>
+												<Card.Title>{`${h.Chain_Name} ${h.Category} Room #${h.Room_Number}`}</Card.Title>
+												<Card.Text>
+													<ul key={h.roomId}>
+														<li>Address: {h.Address}</li>
+														<li>Capacity: {h.Capacity}</li>
+														<li>Price: {h.Price}</li>
+														<li>Rating: {starArray(h.Rating)}</li>
+													</ul>
+												</Card.Text>
+												<Button
+													variant="primary"
+													onClick={() => handleShow(index)}
+												>
+													More Info
+												</Button>
+											</Card.Body>
+										</Card>
+									</Col>
+								);
+							})
+						) : (
+							<h2>
+								<b>0 Results</b>
+							</h2>
+						)}
+
 						<Modal show={show} onHide={handleClose}>
 							<Modal.Header closeButton>
-								<Modal.Title>{props.hotelName}</Modal.Title>
+								<Modal.Title>{`${room.Chain_Name} ${room.Category} Room #${room.Room_Number}`}</Modal.Title>
 							</Modal.Header>
 							<Modal.Body>
-								<p>Contact Email: {props.contactEmail}</p>
-								<p>Contact Phone: {props.contactPhone}</p>
-								<p>Number of Rooms: {props.numRooms}</p>
-								<p>Category: {props.category}</p>
-								<p>Chain Name: {props.chainName}</p>
-								<p>Room Amenities: {props.amenities}</p>
-								<p>Room Capacity: {props.capacity}</p>
-								<p>Room View: {props.view}</p>
-								<p>Extendable: {props.extendable ? "Yes" : "No"}</p>
-								<p>Damage: {props.damage}</p>
+								<p>
+									<b>Contact Email:</b> {room.Contact_Email}
+								</p>
+								<p>
+									<b>Contact Phone:</b> {room.Contact_Phone}
+								</p>
+								<p>
+									<b>Number of Rooms In Hotel:</b> {room.Room_Number}
+								</p>
+								<p>
+									<b>Category:</b> {room.Category}
+								</p>
+								<p>
+									<b>Chain Name:</b> {room.Chain_Name}
+								</p>
+								<p>
+									<b>Room Amenities:</b> {room.Amenities}
+								</p>
+								<p>
+									<b>Room Capacity:</b> {room.Capacity}
+								</p>
+								<p>
+									<b>Room View:</b> {room.View}
+								</p>
+								<p>
+									<b>Extendable:</b> {room.Extendable ? "Yes" : "No"}
+								</p>
+								<p>
+									<b>Damage:</b> {room.Damage ? room.Damage : "No damage"}
+								</p>
 							</Modal.Body>
 							<Modal.Footer>
 								<Button variant="secondary" onClick={handleClose}>
