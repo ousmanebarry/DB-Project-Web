@@ -30,11 +30,10 @@ const HomePage = (props) => {
 	const fetchRooms = (info) => {
 		const requestOptions = {
 			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-			},
+			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify(info),
 		};
+
 		fetch("http://localhost:8800/api/customer/searchRooms", requestOptions)
 			.then((response) => response.json())
 			.then((data) => setRooms(data));
@@ -43,18 +42,14 @@ const HomePage = (props) => {
 	const handleSubmit = (event) => {
 		event.preventDefault();
 
-		const data = new FormData(event.target);
-
 		fetchRooms({
 			capacity: capacity ? capacity : null,
-			area: area ? capacity : null,
+			area: area ? area : null,
 			chainName: chainName ? chainName : null,
 			category: category ? category : null,
 			roomCount: roomCount ? roomCount : null,
 			price: price ? price : null,
 		});
-
-		console.log(data);
 	};
 
 	const handleReset = () => {
@@ -64,6 +59,15 @@ const HomePage = (props) => {
 		setCategory("");
 		setRoomCount("");
 		setPrice("");
+
+		fetchRooms({
+			capacity: null,
+			area: null,
+			chainName: null,
+			category: null,
+			roomsCount: null,
+			price: null,
+		});
 	};
 
 	const starArray = (rating) =>
@@ -79,30 +83,51 @@ const HomePage = (props) => {
 
 	return (
 		<>
-			<Row>
-				<Col md={4}>
+			<Row className="mt-5">
+				<Col md={2} className="ml-5">
 					<Form onSubmit={handleSubmit}>
-						<Form.Group controlId="capacity">
-							<Form.Label>Capacity</Form.Label>
+						<Form.Group
+							controlId="capacity"
+							className="mb-4"
+							style={{ width: "15rem" }}
+						>
+							<Form.Label>
+								<b>Capacity</b>
+							</Form.Label>
 							<Form.Control
 								type="number"
 								value={capacity}
+								style={{ borderWidth: "medium" }}
 								onChange={(event) => setCapacity(event.target.value)}
 							/>
 						</Form.Group>
-						<Form.Group controlId="area">
-							<Form.Label>Area</Form.Label>
+						<Form.Group
+							controlId="area"
+							className="mb-4"
+							style={{ width: "15rem" }}
+						>
+							<Form.Label>
+								<b>Area</b>
+							</Form.Label>
 							<Form.Control
 								type="text"
 								value={area}
+								style={{ borderWidth: "medium" }}
 								onChange={(event) => setArea(event.target.value)}
 							/>
 						</Form.Group>
-						<Form.Group controlId="chainName">
-							<Form.Label>Chain Name</Form.Label>
+						<Form.Group
+							controlId="chainName"
+							className="mb-4"
+							style={{ width: "15rem" }}
+						>
+							<Form.Label>
+								<b>Chain Name</b>
+							</Form.Label>
 							<Form.Control
 								as="select"
 								value={chainName}
+								style={{ borderWidth: "medium" }}
 								onChange={(event) => setChainName(event.target.value)}
 							>
 								<option value="">Any</option>
@@ -113,11 +138,18 @@ const HomePage = (props) => {
 								<option value="Wyndham">Wyndham</option>
 							</Form.Control>
 						</Form.Group>
-						<Form.Group controlId="category">
-							<Form.Label>Category</Form.Label>
+						<Form.Group
+							controlId="category"
+							className="mb-4"
+							style={{ width: "15rem" }}
+						>
+							<Form.Label>
+								<b>Category</b>
+							</Form.Label>
 							<Form.Control
 								as="select"
 								value={category}
+								style={{ borderWidth: "medium" }}
 								onChange={(event) => setCategory(event.target.value)}
 							>
 								<option value="">Any</option>
@@ -127,19 +159,33 @@ const HomePage = (props) => {
 								<option value="motel">Motel</option>
 							</Form.Control>
 						</Form.Group>
-						<Form.Group controlId="roomCount">
-							<Form.Label>Room Count</Form.Label>
+						<Form.Group
+							controlId="roomCount"
+							className="mb-4"
+							style={{ width: "15rem" }}
+						>
+							<Form.Label>
+								<b>Room Count</b>
+							</Form.Label>
 							<Form.Control
 								type="number"
 								value={roomCount}
+								style={{ borderWidth: "medium" }}
 								onChange={(event) => setRoomCount(event.target.value)}
 							/>
 						</Form.Group>
-						<Form.Group controlId="price">
-							<Form.Label>Price</Form.Label>
+						<Form.Group
+							controlId="price"
+							className="mb-4"
+							style={{ width: "15rem" }}
+						>
+							<Form.Label>
+								<b>Price</b>
+							</Form.Label>
 							<Form.Control
 								type="number"
 								value={price}
+								style={{ borderWidth: "medium" }}
 								onChange={(event) => setPrice(event.target.value)}
 							/>
 						</Form.Group>
@@ -155,19 +201,23 @@ const HomePage = (props) => {
 					<Row>
 						{rooms.map((h) => {
 							return (
-								<Col key={h.hotelId} md={6} lg={4} className="mb-4">
+								<Col md={6} lg={4} className="mb-4">
 									<Card>
 										<Card.Body>
 											<Card.Title>{`${h.Chain_Name} ${h.Category} Room #${h.Room_Number}`}</Card.Title>
 											<Card.Text>
-												<ul>
+												<ul key={h.roomId}>
 													<li>Address: {h.Address}</li>
 													<li>Capacity: {h.Capacity}</li>
 													<li>Price: {h.Price}</li>
 													<li>Rating: {starArray(h.Price)}</li>
 												</ul>
 											</Card.Text>
-											<Button variant="primary" onClick={handleShow}>
+											<Button
+												variant="primary"
+												onClick={handleShow}
+												key={h.roomId}
+											>
 												More Info
 											</Button>
 										</Card.Body>
