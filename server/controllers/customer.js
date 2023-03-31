@@ -16,18 +16,6 @@ export const searchRooms = (req, res) => {
 	);
 };
 
-export const searchRoom = (req, res) => {
-	let q = "CALL Search_Room(?,?)";
-
-	const { hotelId, roomId } = req.body;
-
-	db.query(q, [hotelId, roomId], (err, results) => {
-		if (err) return res.json(err).status(404);
-
-		res.json(results[0]).status(200);
-	});
-};
-
 export const book = (req, res) => {
 	let q = "CALL Customer_Booking(?,?,?,?,?,?,?,?,?,@Customer_ID)";
 

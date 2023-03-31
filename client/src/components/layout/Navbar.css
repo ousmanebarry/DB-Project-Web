@@ -1,43 +1,38 @@
-.navbar-brand{
-  font-size: 50px;
-  color:  black;
+.navbar-brand {
+	font-size: 50px;
+	color: black;
 }
 
 .navbar-dark .navbar-brand {
-  color: black;
+	color: black;
 }
 
-.navbar-dark .navbar-brand:hover{
-  color:black;
+.navbar-dark .navbar-brand:hover {
+	color: black;
 }
-
 
 .navbar-dark .navbar-nav .nav-link {
-  color: black;
+	color: black;
 }
 
-.nav-btn{
-  padding:10px;
-  color:  black;
-  border: 1px solid black;
-  padding : 10px;
-  font-size: 20px;  
-  border-radius: 4px;
-  
+.nav-btn {
+	padding: 10px;
+	color: black;
+	border: 1px solid black;
+	padding: 10px;
+	font-size: 20px;
+	border-radius: 4px;
 }
 
-.nav-btn:hover{
-  font-weight: bold !important; 
+.nav-btn:hover {
+	font-weight: bold !important;
 }
 
 .my-navbar {
-  
-  background-color: #FDF5DF;
-  border-bottom: 3px solid black;
-
+	background-color: #fdf5df;
 }
 
-.logoText{
-  font-size: 40px;
-  color: black;
+.logoText {
+	font-size: 40px;
+	color: black;
 }

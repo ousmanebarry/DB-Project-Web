@@ -8,10 +8,10 @@ import {
 	Redirect,
 } from "react-router-dom";
 import { useState } from "react";
-import Booking from "./components/CustomerView/Booking.js";
 import { UserContext } from "./Contexts/UserContext";
-import SignIn from "./components/signIn/signin";
+import SignIn from "./components/SignIn/signin.js";
 import HomePage from "./components/Home/home";
+import BookPage from "./components/Book/book";
 import Branches from "./components/HotelBranches/hotelBranches";
 
 function App() {
@@ -28,30 +28,20 @@ function App() {
 			<UserContext.Provider value={{ user, setUser }}>
 				<Switch>
 					<Route exact path="/">
-						<Navbar
-							List={[
-								{ display: "Sign In", path: "/login" },
-								{ display: "Branches", path: "/branches" },
-							]}
-						/>
+						<Navbar List={[{ display: "Employee Login", path: "/login" }]} />
 						<HomePage />
 						<Footer />
 					</Route>
 
 					<Route exact path="/login">
-						<Navbar List={[{ display: "Home Page", path: "/Database" }]} />
+						<Navbar List={[{ display: "Home Page", path: "/" }]} />
 						<SignIn />
 						<Footer />
 					</Route>
 
-					<Route exact path="/booking">
-						<Navbar
-							List={[
-								{ display: "Home Page", path: "/" },
-								{ display: "Branches", path: "/branches" },
-							]}
-						/>
-						<Booking />
+					<Route exact path="/book">
+						<Navbar List={[{ display: "Home Page", path: "/" }]} />
+						<BookPage />
 						<Footer />
 					</Route>
 
