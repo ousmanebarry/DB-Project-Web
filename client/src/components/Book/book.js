@@ -1,11 +1,10 @@
 import "./book.css";
 import { useState } from "react";
 import { Form, Button } from "react-bootstrap";
-import { useLocation } from "react-router-dom";
+import { useLocation, useHistory } from "react-router-dom";
 
-const BookPage = (props) => {
-	const [isBooked, setIsBooked] = useState(false);
-
+const BookPage = () => {
+	const history = useHistory();
 	const location = useLocation();
 	const {
 		chainName,
@@ -28,7 +27,6 @@ const BookPage = (props) => {
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
-		// Add code here to handle form submission
 		const requestOptions = {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
@@ -44,16 +42,19 @@ const BookPage = (props) => {
 			}),
 		};
 
-		fetch("http://localhost:8800/api/customer/book", requestOptions).then(
-			(response) => {
+		fetch("http://localhost:8800/api/customer/book", requestOptions)
+			.then((response) => {
+				console.log("Response status:", response.status);
 				if (response.status === 200) {
-					setIsBooked(true);
+					history.push("/");
 				}
-			}
-		);
+			})
+			.catch((error) => {
+				console.error("Fetch error:", error);
+			});
 	};
 
-	return isBooked === false ? (
+	return (
 		<div className="d-flex flex-column align-items-center justify-content-center vh-100">
 			<h4 className="text-center mb-4">
 				<b>{`${chainName} ${category} Room #${roomNumber} Booking`}</b>
@@ -67,6 +68,12 @@ const BookPage = (props) => {
 				</li>
 				<li>
 					<b>Price:</b> {`$${price}`}
+				</li>
+				<li>
+					<b>Phone:</b> {contactPhone}
+				</li>
+				<li>
+					<b>Email:</b> {contactEmail}
 				</li>
 			</ul>
 			<Form onSubmit={handleSubmit}>
@@ -118,8 +125,6 @@ const BookPage = (props) => {
 				</Button>
 			</Form>
 		</div>
-	) : (
-		<h1>Booking confirmed</h1>
 	);
 };
 
