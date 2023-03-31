@@ -9,10 +9,11 @@ import {
 } from "react-router-dom";
 import { useState } from "react";
 import { UserContext } from "./Contexts/UserContext";
-import SignIn from "./components/SignIn/signin.js";
+import SignIn from "./components/signIn/signin";
 import HomePage from "./components/Home/home";
 import BookPage from "./components/Book/book";
 import Branches from "./components/HotelBranches/hotelBranches";
+import Employee from "./components/Employee/employee";
 
 function App() {
 	const [user, setUser] = useState({
@@ -27,6 +28,13 @@ function App() {
 		<Router>
 			<UserContext.Provider value={{ user, setUser }}>
 				<Switch>
+					
+				<Route exact path="/Employee">
+						<Navbar List={[{ display: "Booking", path: "/booking" },]} />
+						<Employee />
+						<Footer />
+					</Route>
+
 					<Route exact path="/">
 						<Navbar List={[{ display: "Employee Login", path: "/login" }]} />
 						<HomePage />

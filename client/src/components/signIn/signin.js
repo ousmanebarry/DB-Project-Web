@@ -14,7 +14,7 @@ const SignIn = () => {
 				<div className="row justify-content-center mt-5">
 					<div id="signInBorder" className="col-lg-4 pt-5">
 						<div className="justify-item-center text-center formTitle">
-							Sign In
+							Employee Sign In
 						</div>
 						<form>
 							<div className="form-group mt-3 ">
@@ -36,19 +36,8 @@ const SignIn = () => {
 									placeholder="Password"
 								/>
 							</div>
-
-							<select
-								id="selectionFormSignIN"
-								className="form-select"
-								aria-label="Default select example"
-								onChange={(e) => setPosition(e.target.value)}
-							>
-								<option value="patient">Admin</option>
-								<option value="receptionist">Customer</option>
-							</select>
-
 							<div className="text-center">
-								<div className="btn btn-dark mb-5">Submit</div>
+								<div className="btn btn-dark mb-5" onClick={() => {window.location.href = "http://localhost:3000/Database/Employee"}}>Submit</div>
 							</div>
 						</form>
 					</div>
