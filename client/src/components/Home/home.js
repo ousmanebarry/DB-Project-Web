@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Row, Col, Form, Card, Button, Modal } from "react-bootstrap";
 import { FaStar } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const HomePage = (props) => {
 	const [show, setShow] = useState(false);
@@ -169,7 +170,7 @@ const HomePage = (props) => {
 							style={{ width: "15rem" }}
 						>
 							<Form.Label>
-								<b>Room Count</b>
+								<b>Room Count (More Than)</b>
 							</Form.Label>
 							<Form.Control
 								type="number"
@@ -184,7 +185,7 @@ const HomePage = (props) => {
 							style={{ width: "15rem" }}
 						>
 							<Form.Label>
-								<b>Price</b>
+								<b>Price (Less Than)</b>
 							</Form.Label>
 							<Form.Control
 								type="number"
@@ -209,12 +210,14 @@ const HomePage = (props) => {
 									<Col md={6} lg={4} className="mb-4">
 										<Card>
 											<Card.Body>
-												<Card.Title>{`${h.Chain_Name} ${h.Category} Room #${h.Room_Number}`}</Card.Title>
+												<Card.Title>
+													<b>{`${h.Chain_Name} ${h.Category} Room #${h.Room_Number}`}</b>
+												</Card.Title>
 												<Card.Text>
 													<ul key={h.roomId}>
 														<li>Address: {h.Address}</li>
 														<li>Capacity: {h.Capacity}</li>
-														<li>Price: {h.Price}</li>
+														<li>Price: {`$${h.Price}`}</li>
 														<li>Rating: {starArray(h.Rating)}</li>
 													</ul>
 												</Card.Text>
@@ -236,7 +239,7 @@ const HomePage = (props) => {
 						)}
 
 						<Modal show={show} onHide={handleClose}>
-							<Modal.Header closeButton>
+							<Modal.Header>
 								<Modal.Title>{`${room.Chain_Name} ${room.Category} Room #${room.Room_Number}`}</Modal.Title>
 							</Modal.Header>
 							<Modal.Body>
@@ -270,14 +273,33 @@ const HomePage = (props) => {
 								<p>
 									<b>Damage:</b> {room.Damage ? room.Damage : "No damage"}
 								</p>
+								<p>
+									<b>Price:</b> {`$${room.Price}`}
+								</p>
 							</Modal.Body>
 							<Modal.Footer>
 								<Button variant="secondary" onClick={handleClose}>
 									Close
 								</Button>
-								<Button variant="primary" onClick={props.bookRoom}>
-									Book Room
-								</Button>
+								<Link
+									to={{
+										pathname: "/book",
+										state: {
+											chainName: room.Chain_Name,
+											category: room.Category,
+											roomNumber: room.Room_Number,
+											price: room.Price,
+											hAddress: room.Address,
+											contactPhone: room.Contact_Phone,
+											contactEmail: room.Contact_Email,
+											capacity: room.Capacity,
+											roomId: room.Room_ID,
+											hotelId: room.Hotel_ID,
+										},
+									}}
+								>
+									<Button variant="primary">Book Room</Button>
+								</Link>
 							</Modal.Footer>
 						</Modal>
 					</Row>

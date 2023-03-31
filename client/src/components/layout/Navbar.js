@@ -6,7 +6,7 @@ const Navbar = (props) => {
 	return (
 		<nav className="sticky-top navbar navbar-expand-md navbar-dark my-navbar ">
 			<div className="navbar-brand">
-				<b>NA Hotels</b>
+				<b>N</b>orth <b>H</b>otels
 			</div>
 			<button
 				className="navbar-toggler"
