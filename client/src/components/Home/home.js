@@ -17,24 +17,23 @@ const HomePage = (props) => {
 	const [price, setPrice] = useState("");
 
 	useEffect(() => {
-		fetchRooms();
-		console.log(rooms);
-	}, [rooms]);
+		fetchRooms({
+			capacity: null,
+			area: null,
+			chainName: null,
+			category: null,
+			roomsCount: null,
+			price: null,
+		});
+	}, []);
 
-	const fetchRooms = () => {
+	const fetchRooms = (info) => {
 		const requestOptions = {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
 			},
-			body: JSON.stringify({
-				capacity: null,
-				area: null,
-				chainName: "Cardinal",
-				category: null,
-				roomsCount: null,
-				price: null,
-			}),
+			body: JSON.stringify(info),
 		};
 		fetch("http://localhost:8800/api/customer/searchRooms", requestOptions)
 			.then((response) => response.json())
@@ -43,6 +42,19 @@ const HomePage = (props) => {
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
+
+		const data = new FormData(event.target);
+
+		fetchRooms({
+			capacity: capacity ? capacity : null,
+			area: area ? capacity : null,
+			chainName: chainName ? chainName : null,
+			category: category ? category : null,
+			roomCount: roomCount ? roomCount : null,
+			price: price ? price : null,
+		});
+
+		console.log(data);
 	};
 
 	const handleReset = () => {
@@ -143,14 +155,10 @@ const HomePage = (props) => {
 					<Row>
 						{rooms.map((h) => {
 							return (
-								// <Col key={hotel.hotelId} md={6} lg={4} className="mb-4">
-								// 	<HotelCard hotel={hotel} />
-
-								// </Col>
-								<>
+								<Col key={h.hotelId} md={6} lg={4} className="mb-4">
 									<Card>
 										<Card.Body>
-											<Card.Title>{`${h.Chain_Name} ${h.Category} Hotel`}</Card.Title>
+											<Card.Title>{`${h.Chain_Name} ${h.Category} Room #${h.Room_Number}`}</Card.Title>
 											<Card.Text>
 												<ul>
 													<li>Address: {h.Address}</li>
@@ -164,35 +172,34 @@ const HomePage = (props) => {
 											</Button>
 										</Card.Body>
 									</Card>
-
-									<Modal show={show} onHide={handleClose}>
-										<Modal.Header closeButton>
-											<Modal.Title>{props.hotelName}</Modal.Title>
-										</Modal.Header>
-										<Modal.Body>
-											<p>Contact Email: {props.contactEmail}</p>
-											<p>Contact Phone: {props.contactPhone}</p>
-											<p>Number of Rooms: {props.numRooms}</p>
-											<p>Category: {props.category}</p>
-											<p>Chain Name: {props.chainName}</p>
-											<p>Room Amenities: {props.amenities}</p>
-											<p>Room Capacity: {props.capacity}</p>
-											<p>Room View: {props.view}</p>
-											<p>Extendable: {props.extendable ? "Yes" : "No"}</p>
-											<p>Damage: {props.damage}</p>
-										</Modal.Body>
-										<Modal.Footer>
-											<Button variant="secondary" onClick={handleClose}>
-												Close
-											</Button>
-											<Button variant="primary" onClick={props.bookRoom}>
-												Book Room
-											</Button>
-										</Modal.Footer>
-									</Modal>
-								</>
+								</Col>
 							);
 						})}
+						<Modal show={show} onHide={handleClose}>
+							<Modal.Header closeButton>
+								<Modal.Title>{props.hotelName}</Modal.Title>
+							</Modal.Header>
+							<Modal.Body>
+								<p>Contact Email: {props.contactEmail}</p>
+								<p>Contact Phone: {props.contactPhone}</p>
+								<p>Number of Rooms: {props.numRooms}</p>
+								<p>Category: {props.category}</p>
+								<p>Chain Name: {props.chainName}</p>
+								<p>Room Amenities: {props.amenities}</p>
+								<p>Room Capacity: {props.capacity}</p>
+								<p>Room View: {props.view}</p>
+								<p>Extendable: {props.extendable ? "Yes" : "No"}</p>
+								<p>Damage: {props.damage}</p>
+							</Modal.Body>
+							<Modal.Footer>
+								<Button variant="secondary" onClick={handleClose}>
+									Close
+								</Button>
+								<Button variant="primary" onClick={props.bookRoom}>
+									Book Room
+								</Button>
+							</Modal.Footer>
+						</Modal>
 					</Row>
 				</Col>
 			</Row>
