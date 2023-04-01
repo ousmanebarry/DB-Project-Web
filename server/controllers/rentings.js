@@ -42,7 +42,6 @@ export const employeeRooms = (req, res) => {
 export const employeeRent = (req, res) => {
 	let q = "CALL Employee_Renting(?,?,?,?,?,?,?,?,?,@Customer_ID)";
 
-	// store hotel and room id in react card
 	const { name, address, sin, roomId, hotelId, price, fday, lday } = req.body;
 	const regDate = new Date().toISOString().slice(0, 10);
 
