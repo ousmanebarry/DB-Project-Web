@@ -64,7 +64,7 @@ function App() {
 								{ display: "Renting Now", path: "/employee/rentings/rentnow" },
 							]}
 						/>
-						
+						<Rent />
 						<Footer />
 					</Route>
 
