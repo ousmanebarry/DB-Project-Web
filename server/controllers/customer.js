@@ -29,7 +29,7 @@ export const book = (req, res) => {
 		(err) => {
 			if (err) return res.json(err).status(404);
 
-			res.status(200);
+			res.status(200).json("OK");
 		}
 	);
 };
