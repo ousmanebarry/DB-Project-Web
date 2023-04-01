@@ -48,10 +48,23 @@ function App() {
 								{ display: "Booking", path: "/employee/bookings" },
 								{ display: "Renting", path: "/employee/rentings" },
 								{ display: "Profile", path: "/employee/profile" },
-								{ display: "Renting Now", path: "/employee/rentings/rentingnow" },
+								{ display: "Renting Now", path: "/employee/rentnow" },
 							]}
 						/>
 						<Rentings />
+						<Footer />
+					</Route>
+
+					<Route exact path="/employee/rentnow">
+						<Navbar
+							List={[
+								{ display: "Booking", path: "/employee/bookings" },
+								{ display: "Renting", path: "/employee/rentings" },
+								{ display: "Profile", path: "/employee/profile" },
+								{ display: "Renting Now", path: "/employee/rentings/rentnow" },
+							]}
+						/>
+						
 						<Footer />
 					</Route>
 
