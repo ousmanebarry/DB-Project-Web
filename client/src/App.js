@@ -48,6 +48,7 @@ function App() {
 								{ display: "Booking", path: "/employee/bookings" },
 								{ display: "Renting", path: "/employee/rentings" },
 								{ display: "Profile", path: "/employee/profile" },
+								{ display: "Renting Now", path: "/employee/rentings/rentingnow" },
 							]}
 						/>
 						<Rentings />
