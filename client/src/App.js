@@ -2,6 +2,7 @@ import "./App.css";
 import React from "react";
 import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";
+import { Toaster } from "react-hot-toast";
 import {
 	BrowserRouter as Router,
 	Switch,
@@ -22,8 +23,9 @@ function App() {
 				<Route exact path="/employee/bookings">
 					<Navbar
 						List={[
-							{ display: "Booking", path: "/employee/bookings" },
-							{ display: "Renting", path: "/employee/rentings" },
+							{ display: "Bookings", path: "/employee/bookings" },
+							{ display: "Rentings", path: "/employee/rentings" },
+							{ display: "Rent Now", path: "/employee/rent" },
 							{ display: "Profile", path: "/employee/profile" },
 						]}
 					/>
@@ -34,21 +36,21 @@ function App() {
 				<Route exact path="/employee/rentings">
 					<Navbar
 						List={[
-							{ display: "Booking", path: "/employee/bookings" },
-							{ display: "Renting", path: "/employee/rentings" },
+							{ display: "Bookings", path: "/employee/bookings" },
+							{ display: "Rentings", path: "/employee/rentings" },
+							{ display: "Rent Now", path: "/employee/rent" },
 							{ display: "Profile", path: "/employee/profile" },
-							{ display: "Renting Now", path: "/employee/rentnow" },
 						]}
 					/>
 					<Rentings />
 					<Footer />
 				</Route>
-				<Route exact path="/employee/rentnow">
+				<Route exact path="/employee/rent">
 					<Navbar
 						List={[
-							{ display: "Booking", path: "/employee/bookings" },
-							{ display: "Renting", path: "/employee/rentings" },
-							{ display: "Renting Now", path: "/employee/rentings/rentnow" },
+							{ display: "Bookings", path: "/employee/bookings" },
+							{ display: "Rentings", path: "/employee/rentings" },
+							{ display: "Rent Now", path: "/employee/rent" },
 							{ display: "Profile", path: "/employee/profile" },
 						]}
 					/>
@@ -58,8 +60,9 @@ function App() {
 				<Route exact path="/employee/profile">
 					<Navbar
 						List={[
-							{ display: "Booking", path: "/employee/bookings" },
-							{ display: "Renting", path: "/employee/rentings" },
+							{ display: "Bookings", path: "/employee/bookings" },
+							{ display: "Rentings", path: "/employee/rentings" },
+							{ display: "Rent Now", path: "/employee/rent" },
 							{ display: "Profile", path: "/employee/profile" },
 						]}
 					/>
@@ -68,6 +71,7 @@ function App() {
 				</Route>
 
 				<Route exact path="/">
+					<Toaster />
 					<Navbar
 						List={[{ display: "Employee Login", path: "/employee/bookings" }]}
 					/>

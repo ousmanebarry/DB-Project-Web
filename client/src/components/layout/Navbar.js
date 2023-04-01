@@ -5,9 +5,11 @@ import "./Navbar.css";
 const Navbar = (props) => {
 	return (
 		<nav className="sticky-top navbar navbar-expand-md navbar-dark my-navbar ">
-			<div className="navbar-brand">
-				<b>N</b>orth <b>H</b>otels
-			</div>
+			<Link to={"/"}>
+				<div className="navbar-brand">
+					<b>N</b>orth <b>H</b>otels
+				</div>
+			</Link>
 			<button
 				className="navbar-toggler"
 				data-toggle="collapse"

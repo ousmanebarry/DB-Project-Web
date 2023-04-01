@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Row, Col, Form, Card, Button, Modal } from "react-bootstrap";
+import toast, { Toaster } from "react-hot-toast";
 
 function Bookings() {
 	const [bookings, setBookings] = useState([]);
@@ -29,15 +30,18 @@ function Bookings() {
 		fetch("http://localhost:8800/api/deleteBooking", requestOptions)
 			.then((response) => response.json())
 			.then((data) => {
+				toast.success("Moved To Rentings!");
 				fetchBookings();
 			});
 	};
 
 	return (
 		<div>
+			<h1 className="mb-3 ml-3 mt-3">Bookings</h1>
 			{bookings.map((b, index) => {
 				return (
 					<Col md={6} lg={4} className="mb-4">
+						<Toaster />
 						<Card>
 							<Card.Body>
 								<Card.Title>

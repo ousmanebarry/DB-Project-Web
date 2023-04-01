@@ -21,6 +21,7 @@ function Profile() {
 
 	return (
 		<div>
+			<h1 className="mb-3 ml-3 mt-3">Profile</h1>
 			<Col md={6} lg={4} className="mb-4">
 				<Card>
 					<Card.Body>

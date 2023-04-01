@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import { useLocation, useHistory } from "react-router-dom";
+import toast, { Toaster } from "react-hot-toast";
 
 const BookPage = () => {
 	const history = useHistory();
@@ -44,13 +45,14 @@ const BookPage = () => {
 		fetch("http://localhost:8800/api/customer/book", requestOptions)
 			.then((response) => response.json())
 			.then((data) => {
-				console.log(data);
+				toast.success("Successfully Booked!");
 				history.push("/");
 			});
 	};
 
 	return (
 		<div className="d-flex flex-column align-items-center justify-content-center vh-100">
+			<Toaster></Toaster>
 			<h4 className="text-center mb-4">
 				<b>{`${chainName} ${category} Room #${roomNumber} Booking`}</b>
 			</h4>
