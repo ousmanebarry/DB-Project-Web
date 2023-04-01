@@ -9,3 +9,13 @@ export const rentingInfo = (req, res) => {
 		res.status(200).json(results);
 	});
 };
+
+export const deleteRenting = (req, res) => {
+	let q = "DELETE FROM Renting WHERE Renting_ID=?";
+
+	db.query(q, req.body.rentingId, (err) => {
+		if (err) return res.status(404).json(err);
+
+		res.status(200).json("OK");
+	});
+};

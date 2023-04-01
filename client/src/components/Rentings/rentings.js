@@ -33,7 +33,20 @@ function Rentings() {
 	};
 
 	const handleSubmit = () => {
-		console.log("test");
+		const requestOptions = {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({ rentingId: renting.Renting_ID }),
+		};
+
+		fetch("http://localhost:8800/api/deleteRenting", requestOptions)
+			.then((response) => response.json())
+			.then((data) => {
+				console.log(data);
+				setShow(false);
+			});
+
+		fetchRentings();
 	};
 
 	return (
