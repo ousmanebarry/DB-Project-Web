@@ -13,7 +13,7 @@ import SignIn from "./components/signIn/signin";
 import HomePage from "./components/Home/home";
 import BookPage from "./components/Book/book";
 import Branches from "./components/HotelBranches/hotelBranches";
-import Employee from "./components/Employee/employee";
+import Bookings from "./components/Bookings/bookings";
 
 function App() {
 	const [user, setUser] = useState({
@@ -29,9 +29,21 @@ function App() {
 			<UserContext.Provider value={{ user, setUser }}>
 				<Switch>
 					
-				<Route exact path="/Employee">
-						<Navbar List={[{ display: "Booking", path: "/booking" },]} />
-						<Employee />
+				<Route exact path="/employee/booking">
+						<Navbar List={[{ display: "Booking", path: "/employee/booking" },{ display: "Renting", path: "/employee/renting" }, { display: "Profile", path: "/employee/profile" }]} />
+						<Bookings />
+						<Footer />
+					</Route>
+					
+					<Route exact path="/employee/renting">
+						<Navbar List={[{ display: "Booking", path: "/employee/booking" },{ display: "Renting", path: "/employee/renting" }, { display: "Profile", path: "/employee/profile" }]} />
+						
+						<Footer />
+					</Route>
+
+					<Route exact path="/employee/profile">
+						<Navbar List={[{ display: "Booking", path: "/employee/booking" },{ display: "Renting", path: "/employee/renting" }, { display: "Profile", path: "/employee/profile" }]} />
+						
 						<Footer />
 					</Route>
 
