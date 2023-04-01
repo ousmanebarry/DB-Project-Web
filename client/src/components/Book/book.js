@@ -27,6 +27,12 @@ const BookPage = () => {
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
+
+		if (!name || !address || !sin || !startDate || !endDate) {
+			toast.error("Empty Fields");
+			return;
+		}
+
 		const requestOptions = {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
@@ -52,7 +58,7 @@ const BookPage = () => {
 
 	return (
 		<div className="d-flex flex-column align-items-center justify-content-center vh-100">
-			<Toaster></Toaster>
+			<Toaster />
 			<h4 className="text-center mb-4">
 				<b>{`${chainName} ${category} Room #${roomNumber} Booking`}</b>
 			</h4>
@@ -73,8 +79,8 @@ const BookPage = () => {
 					<b>Email:</b> {contactEmail}
 				</li>
 			</ul>
-			<Form onSubmit={handleSubmit}>
-				<Form.Group controlId="name" aria-required>
+			<Form onSubmit={handleSubmit} req>
+				<Form.Group controlId="name" aria-required={true}>
 					<Form.Label>Name</Form.Label>
 					<Form.Control
 						type="text"
@@ -83,7 +89,7 @@ const BookPage = () => {
 						onChange={(event) => setName(event.target.value)}
 					/>
 				</Form.Group>
-				<Form.Group controlId="address" aria-required>
+				<Form.Group controlId="address" aria-required={true}>
 					<Form.Label>Address</Form.Label>
 					<Form.Control
 						type="text"
@@ -92,7 +98,7 @@ const BookPage = () => {
 						onChange={(event) => setAddress(event.target.value)}
 					/>
 				</Form.Group>
-				<Form.Group controlId="sin" aria-required>
+				<Form.Group controlId="sin" aria-required={true}>
 					<Form.Label>SIN</Form.Label>
 					<Form.Control
 						type="text"
@@ -101,7 +107,7 @@ const BookPage = () => {
 						onChange={(event) => setSin(event.target.value)}
 					/>
 				</Form.Group>
-				<Form.Group controlId="startDate" aria-required>
+				<Form.Group controlId="startDate" aria-required={true}>
 					<Form.Label>Start Date</Form.Label>
 					<Form.Control
 						type="date"
@@ -109,7 +115,7 @@ const BookPage = () => {
 						onChange={(event) => setStartDate(event.target.value)}
 					/>
 				</Form.Group>
-				<Form.Group controlId="endDate" aria-required>
+				<Form.Group controlId="endDate" aria-required={true}>
 					<Form.Label>End Date</Form.Label>
 					<Form.Control
 						type="date"

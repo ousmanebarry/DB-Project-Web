@@ -33,6 +33,11 @@ function Rentings() {
 	};
 
 	const handleSubmit = () => {
+		if (!name || !cardNumber || !expirationDate || !cvc) {
+			toast.error("Empty Fields");
+			return;
+		}
+
 		const requestOptions = {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
@@ -50,7 +55,10 @@ function Rentings() {
 
 	return (
 		<div>
-			<h1 className="mb-3 ml-3 mt-3">Rentings</h1>
+			<h1 className="mb-2 ml-3 mt-3">
+				<b>Rentings</b>
+			</h1>
+			<h2 className="ml-3 mb-4">{`${rentings.length} Renting(s)`}</h2>
 			{rentings.map((b, index) => {
 				return (
 					<Col md={6} lg={4} className="mb-4">

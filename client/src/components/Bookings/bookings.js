@@ -37,7 +37,10 @@ function Bookings() {
 
 	return (
 		<div>
-			<h1 className="mb-3 ml-3 mt-3">Bookings</h1>
+			<h1 className="mb-2 ml-3 mt-3">
+				<b>Bookings</b>
+			</h1>
+			<h2 className="ml-3 mb-4">{`${bookings.length} Booking(s)`}</h2>
 			{bookings.map((b, index) => {
 				return (
 					<Col md={6} lg={4} className="mb-4">
