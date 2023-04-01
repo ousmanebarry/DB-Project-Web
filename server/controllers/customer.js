@@ -33,3 +33,15 @@ export const book = (req, res) => {
 		}
 	);
 };
+
+export const checkBooking = (req, res) => {
+	let q = "CALL Check_Booking(?,?,?,?)";
+
+	const { roomId, hotelId, fday, lday } = req.body;
+
+	db.query(q, [roomId, hotelId, fday, lday], (err, results) => {
+		if (err) return res.status(404).json(err);
+
+		res.status(200).json(results[0]);
+	});
+};

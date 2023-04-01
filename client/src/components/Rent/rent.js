@@ -42,26 +42,45 @@ function Rentings() {
 			return;
 		}
 
-		const requestOptions = {
+		const checkOpts = {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify({
-				name,
-				address,
-				sin,
 				roomId: room.Room_ID,
 				hotelId: room.Hotel_ID,
 				fday: startDate,
 				lday: endDate,
-				price: room.Price,
 			}),
 		};
 
-		fetch("http://localhost:8800/api/employeeRent", requestOptions)
+		fetch("http://localhost:8800/api/checkRenting", checkOpts)
 			.then((response) => response.json())
 			.then((data) => {
-				toast.success("Moved To Rentings!");
-				setShow(false);
+				if (data.length === 0) {
+					const requestOptions = {
+						method: "POST",
+						headers: { "Content-Type": "application/json" },
+						body: JSON.stringify({
+							name,
+							address,
+							sin,
+							roomId: room.Room_ID,
+							hotelId: room.Hotel_ID,
+							fday: startDate,
+							lday: endDate,
+							price: room.Price,
+						}),
+					};
+
+					fetch("http://localhost:8800/api/employeeRent", requestOptions)
+						.then((response) => response.json())
+						.then((data) => {
+							toast.success("Moved To Rentings!");
+							setShow(false);
+						});
+				} else {
+					toast.error("Conflict For Selected Time Period");
+				}
 			});
 	};
 

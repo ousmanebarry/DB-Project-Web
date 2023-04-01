@@ -33,26 +33,45 @@ const BookPage = () => {
 			return;
 		}
 
-		const requestOptions = {
+		const checkOpts = {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
 			body: JSON.stringify({
-				name,
-				address,
-				sin,
 				roomId,
 				hotelId,
 				fday: startDate,
 				lday: endDate,
-				price,
 			}),
 		};
 
-		fetch("http://localhost:8800/api/customer/book", requestOptions)
+		fetch("http://localhost:8800/api/customer/checkBooking", checkOpts)
 			.then((response) => response.json())
 			.then((data) => {
-				toast.success("Successfully Booked!");
-				history.push("/");
+				if (data.length === 0) {
+					const requestOptions = {
+						method: "POST",
+						headers: { "Content-Type": "application/json" },
+						body: JSON.stringify({
+							name,
+							address,
+							sin,
+							roomId,
+							hotelId,
+							fday: startDate,
+							lday: endDate,
+							price,
+						}),
+					};
+
+					fetch("http://localhost:8800/api/customer/book", requestOptions)
+						.then((response) => response.json())
+						.then((data) => {
+							toast.success("Successfully Booked!");
+							history.push("/");
+						});
+				} else {
+					toast.error("Conflict For Selected Time Period");
+				}
 			});
 	};
 
