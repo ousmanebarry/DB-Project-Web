@@ -2,7 +2,7 @@ import "./employee.css";
 import React, { useState, useEffect } from "react";
 import { Row, Col, Form, Card, Button, Modal } from "react-bootstrap";
 
-function Employee() {
+function Bookings() {
 	const [bookings, setBookings] = useState([]);
 
 	useEffect(() => {
@@ -48,4 +48,4 @@ function Employee() {
 	);
 }
 
-export default Employee;
+export default Bookings;
