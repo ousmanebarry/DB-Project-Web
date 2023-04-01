@@ -1,5 +1,5 @@
 import "./signin.css";
-import { useState, useContext } from "react";
+import React, { useState, useContext } from "react";
 import { UserContext } from "../../Contexts/UserContext";
 
 const SignIn = () => {
@@ -37,7 +37,15 @@ const SignIn = () => {
 								/>
 							</div>
 							<div className="text-center">
-								<div className="btn btn-dark mb-5" onClick={() => {window.location.href = "http://localhost:3000/Database/Employee"}}>Submit</div>
+								<div
+									className="btn btn-dark mb-5"
+									onClick={() => {
+										window.location.href =
+											"http://localhost:3000/Database/Employee";
+									}}
+								>
+									Submit
+								</div>
 							</div>
 						</form>
 					</div>

@@ -20,6 +20,20 @@ function Bookings() {
 			.then((data) => setBookings(data));
 	};
 
+	const rentRoom = (index) => {
+		const requestOptions = {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({ bookingId: bookings[index].Booking_ID }),
+		};
+
+		fetch("http://localhost:8800/api/deleteBooking", requestOptions)
+			.then((response) => response.json())
+			.then((data) => {
+				fetchRooms();
+			});
+	};
+
 	return (
 		<div>
 			{bookings.map((b, index) => {
@@ -39,7 +53,9 @@ function Bookings() {
 								<Button variant="secondary" className="mr-2">
 									Edit Customer Information
 								</Button>
-								<Button variant="primary">Rent</Button>
+								<Button variant="primary" onClick={() => rentRoom(index)}>
+									Rent
+								</Button>
 							</Card.Body>
 						</Card>
 					</Col>
