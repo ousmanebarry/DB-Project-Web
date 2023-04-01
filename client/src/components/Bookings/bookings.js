@@ -31,14 +31,15 @@ function Bookings() {
 									<b>{`${b.Full_name}`}</b>
 								</Card.Title>
 								<Card.Text>
-									<b>{`${b.Chain_Name} ${b.Category} Room #${b.Room_Number}`}</b>
-									<ul key={b.roomId}>
-										<li>First_Days: {b.First_Day}</li>
-										<li>Last_Day: {b.Last_Day}</li>
-										<li>Price: {`$${b.Price}`}</li>
-									</ul>
+									<h4>{`${b.Chain_Name} ${b.Category} Room #${b.Room_Number}`}</h4>
+									<p>First Day: {b.First_Day.split("T")[0]}</p>
+									<p>Last Day: {b.Last_Day.split("T")[0]}</p>
+									<p>Price: {`$${b.Price}`}</p>
 								</Card.Text>
-								<Button variant="primary">More Info</Button>
+								<Button variant="secondary" className="mr-2">
+									Edit Customer Information
+								</Button>
+								<Button variant="primary">Rent</Button>
 							</Card.Body>
 						</Card>
 					</Col>

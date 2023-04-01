@@ -14,7 +14,8 @@ import HomePage from "./components/Home/home";
 import BookPage from "./components/Book/book";
 import Branches from "./components/HotelBranches/hotelBranches";
 import Bookings from "./components/Bookings/bookings";
-import Rentings from "./components/Rentings/Rentings";
+import Rentings from "./components/Rentings/rentings";
+import Profile from "./components/Profile/profile";
 
 function App() {
 	const [user, setUser] = useState({
@@ -29,21 +30,38 @@ function App() {
 		<Router>
 			<UserContext.Provider value={{ user, setUser }}>
 				<Switch>
-					
-				<Route exact path="/employee/bookings">
-						<Navbar List={[{ display: "Booking", path: "/employee/bookings" },{ display: "Renting", path: "/employee/rentings" }, { display: "Profile", path: "/employee/profile" }]} />
+					<Route exact path="/employee/bookings">
+						<Navbar
+							List={[
+								{ display: "Booking", path: "/employee/bookings" },
+								{ display: "Renting", path: "/employee/rentings" },
+								{ display: "Profile", path: "/employee/profile" },
+							]}
+						/>
 						<Bookings />
 						<Footer />
 					</Route>
-					
+
 					<Route exact path="/employee/rentings">
-						<Navbar List={[{ display: "Booking", path: "/employee/bookings" },{ display: "Renting", path: "/employee/rentings" }, { display: "Profile", path: "/employee/profile" }]} />
+						<Navbar
+							List={[
+								{ display: "Booking", path: "/employee/bookings" },
+								{ display: "Renting", path: "/employee/rentings" },
+								{ display: "Profile", path: "/employee/profile" },
+							]}
+						/>
 						<Rentings />
 						<Footer />
 					</Route>
 
 					<Route exact path="/employee/profile">
-						<Navbar List={[{ display: "Booking", path: "/employee/bookings" },{ display: "Renting", path: "/employee/rentings" }, { display: "Profile", path: "/employee/profile" }]} />
+						<Navbar
+							List={[
+								{ display: "Booking", path: "/employee/bookings" },
+								{ display: "Renting", path: "/employee/rentings" },
+								{ display: "Profile", path: "/employee/profile" },
+							]}
+						/>
 						<Profile />
 						<Footer />
 					</Route>

@@ -6,10 +6,10 @@ function Profile() {
 	const [profile, setProfile] = useState([]);
 
 	useEffect(() => {
-		fetchRooms();
+		fetchProfile();
 	}, []);
 
-	const fetchRooms = () => {
+	const fetchProfile = () => {
 		const requestOptions = {
 			method: "GET",
 			headers: { "Content-Type": "application/json" },
@@ -22,27 +22,23 @@ function Profile() {
 
 	return (
 		<div>
-			{profile.map((b, index) => {
-				return (
-					<Col md={6} lg={4} className="mb-4">
-						<Card>
-							<Card.Body>
-								<Card.Title>
-									<b>{`${b.Full_Name}`}</b>
-								</Card.Title>
-								<Card.Text>
-									<ul key={index}>
-                                        <li>Chain_Name: {b.Chain_Name}</li>
-                                        <li>Position: {b.Position}</li>
-										<li>SIN: {b.SIN}</li>
-                                        <li>Address: {b.Address}</li>
-									</ul>
-								</Card.Text>
-							</Card.Body>
-						</Card>
-					</Col>
-				);
-			})}
+			<Col md={6} lg={4} className="mb-4">
+				<Card>
+					<Card.Body>
+						<Card.Title>
+							<b>{`${profile.Full_Name}`}</b>
+						</Card.Title>
+						<Card.Text>
+							<ul>
+								<li>Chain_Name: {profile.Chain_Name}</li>
+								<li>Position: {profile.Position}</li>
+								<li>SIN: {profile.SIN}</li>
+								<li>Address: {profile.Address}</li>
+							</ul>
+						</Card.Text>
+					</Card.Body>
+				</Card>
+			</Col>
 		</div>
 	);
 }

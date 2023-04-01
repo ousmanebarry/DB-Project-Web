@@ -4,13 +4,19 @@ import { Row, Col, Form, Card, Button, Modal } from "react-bootstrap";
 
 function Rentings() {
 	const [rentings, setRentings] = useState([]);
-    const [show, setShow] = useState(false);
+	const [show, setShow] = useState(false);
+	const [renting, setRenting] = useState({});
+
+	const [name, setName] = useState("");
+	const [cardNumber, setCardNumber] = useState("");
+	const [expirationDate, setExpirationDate] = useState("");
+	const [cvc, setCvc] = useState("");
 
 	useEffect(() => {
-		fetchRooms();
+		fetchRentings();
 	}, []);
 
-	const fetchRooms = () => {
+	const fetchRentings = () => {
 		const requestOptions = {
 			method: "GET",
 			headers: { "Content-Type": "application/json" },
@@ -20,6 +26,13 @@ function Rentings() {
 			.then((response) => response.json())
 			.then((data) => setRentings(data));
 	};
+
+	const handleShow = (index) => {
+		setRenting(rentings[index]);
+		setShow(true);
+	};
+
+	const handleSubmit = () => {};
 
 	return (
 		<div>
@@ -39,75 +52,68 @@ function Rentings() {
 										<li>Price: {`$${b.Price}`}</li>
 									</ul>
 								</Card.Text>
-								<Button variant="primary" onClick={() => setShow(true)}>Pay</Button>
+								<Button variant="primary" onClick={() => handleShow(index)}>
+									Pay
+								</Button>
 							</Card.Body>
 						</Card>
 					</Col>
 				);
 			})}
-            <Modal show={show} onHide={() => setShow(false)}>
-							<Modal.Header>
-								<Modal.Title>{`${room.Chain_Name} ${room.Category} Room #${room.Room_Number}`}</Modal.Title>
-							</Modal.Header>
-							<Modal.Body>
-                            <Form onSubmit={handleSubmit}>
-				<Form.Group controlId="name" aria-required>
-					<Form.Label>Name</Form.Label>
-					<Form.Control
-						type="text"
-						placeholder="Enter your name"
-						value={name}
-						onChange={(event) => setName(event.target.value)}
-					/>
-				</Form.Group>
-                <Form.Group controlId="card_number" aria-required>
-					<Form.Label>Card Number</Form.Label>
-					<Form.Control
-						type="text"
-						placeholder="Enter your SIN"
-						value={card_number}
-						onChange={(event) => setSin(event.target.value)}
-					/>
-				</Form.Group>
-				<Form.Group controlId="address" aria-required>
-					<Form.Label>Address</Form.Label>
-					<Form.Control
-						type="text"
-						placeholder="Enter your address"
-						value={address}
-						onChange={(event) => setAddress(event.target.value)}
-					/>
-				</Form.Group>
-				<Button variant="primary" type="submit" className="mt-3">
-					Pay
-				</Button>
-			</Form>
-							</Modal.Body>
-							<Modal.Footer>
-								<Button variant="secondary" onClick={handleClose}>
-									Close
-								</Button>
-								<Link
-									to={{
-										pathname: "/book",
-										state: {
-											chainName: room.Chain_Name,
-											category: room.Category,
-											roomNumber: room.Room_Number,
-											price: room.Price,
-											hAddress: room.Address,
-											contactPhone: room.Contact_Phone,
-											contactEmail: room.Contact_Email,
-											capacity: room.Capacity,
-											roomId: room.Room_ID,
-											hotelId: room.Hotel_ID,
-										},
-									}}
-								>
-									<Button variant="primary">Book Room</Button>
-								</Link>
-							</Modal.Footer>
-						</Modal>
+			<Modal show={show} onHide={() => setShow(false)}>
+				<Modal.Header>
+					<Modal.Title>{`${renting.Chain_Name} ${renting.Category} Room #${renting.Room_Number}`}</Modal.Title>
+				</Modal.Header>
+				<Modal.Body>
+					<Form onSubmit={handleSubmit}>
+						<Form.Group controlId="name" aria-required>
+							<Form.Label>Name</Form.Label>
+							<Form.Control
+								type="text"
+								placeholder="Enter your name"
+								value={name}
+								onChange={(event) => setName(event.target.value)}
+							/>
+						</Form.Group>
+
+						<Form.Group controlId="cardNumber" aria-required>
+							<Form.Label>Card Number</Form.Label>
+							<Form.Control
+								type="number"
+								placeholder="Enter your card number"
+								value={cardNumber}
+								onChange={(event) => setCardNumber(event.target.value)}
+							/>
+						</Form.Group>
+
+						<Form.Group controlId="expirationDate" aria-required>
+							<Form.Label>Expiration Date</Form.Label>
+							<Form.Control
+								type="date"
+								value={expirationDate}
+								onChange={(event) => setExpirationDate(event.target.value)}
+							/>
+						</Form.Group>
+
+						<Form.Group controlId="CVC" aria-required>
+							<Form.Label>CVC</Form.Label>
+							<Form.Control
+								type="number"
+								placeholder="Enter your CVC"
+								value={cvc}
+								onChange={(event) => setCvc(event.target.value)}
+							/>
+						</Form.Group>
+
+						<Button variant="primary" type="submit" className="mt-3">
+							Pay
+						</Button>
+					</Form>
+				</Modal.Body>
+				<Modal.Footer>
+					<Button variant="primary">Pay For Room</Button>
+				</Modal.Footer>
+			</Modal>
 		</div>
 	);
 }
