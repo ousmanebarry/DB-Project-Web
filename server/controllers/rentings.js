@@ -38,3 +38,21 @@ export const employeeRooms = (req, res) => {
 		res.status(200).json(results);
 	});
 };
+
+export const employeeRent = (req, res) => {
+	let q = "CALL Employee_Renting(?,?,?,?,?,?,?,?,?,@Customer_ID)";
+
+	// store hotel and room id in react card
+	const { name, address, sin, roomId, hotelId, price, fday, lday } = req.body;
+	const regDate = new Date().toISOString().slice(0, 10);
+
+	db.query(
+		q,
+		[name, address, sin, regDate, roomId, hotelId, fday, lday, price],
+		(err) => {
+			if (err) return res.json(err).status(404);
+
+			res.status(200).json("OK");
+		}
+	);
+};

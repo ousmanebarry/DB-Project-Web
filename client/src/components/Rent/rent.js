@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { Row, Col, Form, Card, Button, Modal } from "react-bootstrap";
+import toast, { Toaster } from "react-hot-toast";
 
 function Rentings() {
 	const [rooms, setRooms] = useState([]);
+	const [room, setRoom] = useState([]);
 	const [show, setShow] = useState(false);
 	const [renting, setRenting] = useState({});
-	const [startDate, setStartDate] = useState({});
-	const [endDate, setEndDate] = useState({});
-
+	const [startDate, setStartDate] = useState("");
+	const [endDate, setEndDate] = useState("");
+	const [address, setAddress] = useState("");
+	const [sin, setSin] = useState("");
 	const [name, setName] = useState("");
-	const [hotel, setHotel] = useState(1);
-	const [room, setRoom] = useState(1);
-	const [price, setPrice] = useState(0);
 
 	useEffect(() => {
 		fetchRooms();
@@ -29,25 +29,45 @@ function Rentings() {
 			.then((data) => setRooms(data));
 	};
 
-	const handleSubmit = () => {
+	const handleShow = (index) => {
+		setRoom(rooms[index]);
+		setShow(true);
+	};
+
+	const handleSubmit = (event) => {
+		event.preventDefault();
+
+		if (!name || !address || !sin || !startDate || !endDate) {
+			toast.error("Empty Fields");
+			return;
+		}
+
 		const requestOptions = {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify({ rentingId: renting.Renting_ID }),
+			body: JSON.stringify({
+				name,
+				address,
+				sin,
+				roomId: room.Room_ID,
+				hotelId: room.Hotel_ID,
+				fday: startDate,
+				lday: endDate,
+				price: room.Price,
+			}),
 		};
 
-		fetch("http://localhost:8800/api/rentNow", requestOptions)
+		fetch("http://localhost:8800/api/employeeRent", requestOptions)
 			.then((response) => response.json())
 			.then((data) => {
-				console.log(data);
+				toast.success("Moved To Rentings!");
 				setShow(false);
 			});
-
-		fetchRooms();
 	};
 
 	return (
 		<div>
+			<Toaster />
 			<h1 className="mb-2 ml-3 mt-3">
 				<b>Rent Now</b>
 			</h1>
@@ -66,12 +86,72 @@ function Rentings() {
 										<li>Price: {`$${h.Price}`}</li>
 									</ul>
 								</Card.Text>
-								<Button variant="primary">Rent Now</Button>
+								<Button variant="primary" onClick={() => handleShow(index)}>
+									Rent Now
+								</Button>
 							</Card.Body>
 						</Card>
 					</Col>
 				);
 			})}
+			<Modal show={show} onHide={() => setShow(false)}>
+				<Toaster />
+				<Modal.Header>
+					<Modal.Title>{`${room.Chain_Name} ${room.Category} Room #${room.Room_Number}`}</Modal.Title>
+				</Modal.Header>
+				<Modal.Body>
+					<Form>
+						<Form.Group controlId="name" aria-required>
+							<Form.Label>Name</Form.Label>
+							<Form.Control
+								type="text"
+								placeholder="Enter customer name"
+								value={name}
+								onChange={(event) => setName(event.target.value)}
+							/>
+						</Form.Group>
+						<Form.Group controlId="address" aria-required={true}>
+							<Form.Label>Address</Form.Label>
+							<Form.Control
+								type="text"
+								placeholder="Enter customer address"
+								value={address}
+								onChange={(event) => setAddress(event.target.value)}
+							/>
+						</Form.Group>
+						<Form.Group controlId="sin" aria-required={true}>
+							<Form.Label>SIN</Form.Label>
+							<Form.Control
+								type="text"
+								placeholder="Enter customer SIN"
+								value={sin}
+								onChange={(event) => setSin(event.target.value)}
+							/>
+						</Form.Group>
+						<Form.Group controlId="startDate" aria-required={true}>
+							<Form.Label>Start Date</Form.Label>
+							<Form.Control
+								type="date"
+								value={startDate}
+								onChange={(event) => setStartDate(event.target.value)}
+							/>
+						</Form.Group>
+						<Form.Group controlId="endDate" aria-required={true}>
+							<Form.Label>End Date</Form.Label>
+							<Form.Control
+								type="date"
+								value={endDate}
+								onChange={(event) => setEndDate(event.target.value)}
+							/>
+						</Form.Group>
+					</Form>
+				</Modal.Body>
+				<Modal.Footer>
+					<Button variant="primary" onClick={handleSubmit}>
+						Rent Now
+					</Button>
+				</Modal.Footer>
+			</Modal>
 		</div>
 	);
 }
