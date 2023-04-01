@@ -10,9 +10,9 @@ function Rentings() {
 	const [endDate, setEndDate] = useState({});
 
 	const [name, setName] = useState("");
-	const [cardNumber, setCardNumber] = useState("");
-	const [expirationDate, setExpirationDate] = useState("");
-	const [cvc, setCvc] = useState("");
+	const [hotel, setHotel] = useState(1);
+	const [room, setRoom] = useState(1);
+	const [price, setPrice] = useState(0);
 
 	useEffect(() => {
 		fetchRentings();
@@ -29,11 +29,6 @@ function Rentings() {
 			.then((data) => setRentings(data));
 	};
 
-	const handleShow = (index) => {
-		setRenting(rentings[index]);
-		setShow(true);
-	};
-
 	const handleSubmit = () => {
 		const requestOptions = {
 			method: "POST",
@@ -41,7 +36,7 @@ function Rentings() {
 			body: JSON.stringify({ rentingId: renting.Renting_ID }),
 		};
 
-		fetch("http://localhost:8800/api/deleteRenting", requestOptions)
+		fetch("http://localhost:8800/api/rentNow", requestOptions)
 			.then((response) => response.json())
 			.then((data) => {
 				console.log(data);
@@ -57,10 +52,12 @@ function Rentings() {
 
 	return (
 		<div>
-			<Button variant="primary" onClick={rentNow}>Rent Now</Button>
+			<Button variant="primary" onClick={rentNow}>
+				Rent Now
+			</Button>
 			<Modal show={show} onHide={() => setShow(false)}>
 				<Modal.Header>
-					<Modal.Title>{`${renting.Chain_Name} ${renting.Category} Room #${renting.Room_Number}`}</Modal.Title>
+					<Modal.Title>{"Rent A Room Now"}</Modal.Title>
 				</Modal.Header>
 				<Modal.Body>
 					<Form>
@@ -71,6 +68,36 @@ function Rentings() {
 								placeholder="Enter your name"
 								value={name}
 								onChange={(event) => setName(event.target.value)}
+							/>
+						</Form.Group>
+
+						<Form.Group controlId="hotel" aria-required>
+							<Form.Label>Hotel ID</Form.Label>
+							<Form.Control
+								type="number"
+								placeholder="Enter the hotel id"
+								value={hotel}
+								onChange={(event) => setHotel(event.target.value)}
+							/>
+						</Form.Group>
+
+						<Form.Group controlId="room" aria-required>
+							<Form.Label>Room ID</Form.Label>
+							<Form.Control
+								type="number"
+								placeholder="Enter the room id"
+								value={room}
+								onChange={(event) => setRoom(event.target.value)}
+							/>
+						</Form.Group>
+
+						<Form.Group controlId="price" aria-required>
+							<Form.Label>Price</Form.Label>
+							<Form.Control
+								type="number"
+								placeholder="Enter the price"
+								value={price}
+								onChange={(event) => setPrice(event.target.value)}
 							/>
 						</Form.Group>
 
@@ -95,7 +122,7 @@ function Rentings() {
 				</Modal.Body>
 				<Modal.Footer>
 					<Button variant="primary" onClick={handleSubmit}>
-						Pay For Room
+						Rent Now
 					</Button>
 				</Modal.Footer>
 			</Modal>

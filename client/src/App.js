@@ -81,7 +81,9 @@ function App() {
 					</Route>
 
 					<Route exact path="/">
-						<Navbar List={[{ display: "Employee Login", path: "/login" }]} />
+						<Navbar
+							List={[{ display: "Employee Login", path: "/employee/bookings" }]}
+						/>
 						<HomePage />
 						<Footer />
 					</Route>

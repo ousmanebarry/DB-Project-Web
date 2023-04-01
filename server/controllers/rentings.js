@@ -19,3 +19,11 @@ export const deleteRenting = (req, res) => {
 		res.status(200).json("OK");
 	});
 };
+
+export const rentNow = (req, res) => {
+	let q = "CALL Customer_Renting(?,?,?,?,?,?)";
+
+	const {} = req.body;
+
+	db.query(q, []);
+};

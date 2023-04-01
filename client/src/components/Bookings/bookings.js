@@ -6,10 +6,10 @@ function Bookings() {
 	const [bookings, setBookings] = useState([]);
 
 	useEffect(() => {
-		fetchRooms();
+		fetchBookings();
 	}, []);
 
-	const fetchRooms = () => {
+	const fetchBookings = () => {
 		const requestOptions = {
 			method: "GET",
 			headers: { "Content-Type": "application/json" },
@@ -30,7 +30,7 @@ function Bookings() {
 		fetch("http://localhost:8800/api/deleteBooking", requestOptions)
 			.then((response) => response.json())
 			.then((data) => {
-				fetchRooms();
+				fetchBookings();
 			});
 	};
 
@@ -50,9 +50,6 @@ function Bookings() {
 									<p>Last Day: {b.Last_Day.split("T")[0]}</p>
 									<p>Price: {`$${b.Price}`}</p>
 								</Card.Text>
-								<Button variant="secondary" className="mr-2">
-									Edit Customer Information
-								</Button>
 								<Button variant="primary" onClick={() => rentRoom(index)}>
 									Rent
 								</Button>
