@@ -43,14 +43,10 @@ const BookPage = () => {
 		};
 
 		fetch("http://localhost:8800/api/customer/book", requestOptions)
-			.then((response) => {
-				console.log("Response status:", response.status);
-				if (response.status === 200) {
-					history.push("/");
-				}
-			})
-			.catch((error) => {
-				console.error("Fetch error:", error);
+			.then((response) => response.json())
+			.then((data) => {
+				console.log(data);
+				history.push("/");
 			});
 	};
 
