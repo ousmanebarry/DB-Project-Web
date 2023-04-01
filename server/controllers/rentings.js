@@ -27,3 +27,14 @@ export const rentNow = (req, res) => {
 
 	db.query(q, []);
 };
+
+export const employeeRooms = (req, res) => {
+	let q =
+		"SELECT r.*, h.Address, h.Number_Of_Rooms, h.Contact_Email, h.Contact_Phone, h.Category, h.Rating, h.Chain_Name FROM Room r INNER JOIN Employee e ON r.Hotel_ID=? INNER JOIN Hotel h ON r.Hotel_ID=h.Hotel_ID";
+
+	db.query(q, req.body.hotelId, (err, results) => {
+		if (err) return res.status(404).json(err);
+
+		res.status(200).json(results);
+	});
+};

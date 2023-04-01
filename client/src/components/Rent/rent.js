@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Row, Col, Form, Card, Button, Modal } from "react-bootstrap";
 
 function Rentings() {
-	const [rentings, setRentings] = useState([]);
+	const [rooms, setRooms] = useState([]);
 	const [show, setShow] = useState(false);
 	const [renting, setRenting] = useState({});
 	const [startDate, setStartDate] = useState({});
@@ -14,18 +14,19 @@ function Rentings() {
 	const [price, setPrice] = useState(0);
 
 	useEffect(() => {
-		fetchRentings();
+		fetchRooms();
 	}, []);
 
-	const fetchRentings = () => {
+	const fetchRooms = () => {
 		const requestOptions = {
-			method: "GET",
+			method: "POST",
 			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({ hotelId: 1 }),
 		};
 
-		fetch("http://localhost:8800/api/rentings", requestOptions)
+		fetch("http://localhost:8800/api/employeeRooms", requestOptions)
 			.then((response) => response.json())
-			.then((data) => setRentings(data));
+			.then((data) => setRooms(data));
 	};
 
 	const handleSubmit = () => {
@@ -42,89 +43,35 @@ function Rentings() {
 				setShow(false);
 			});
 
-		fetchRentings();
-	};
-
-	const rentNow = () => {
-		setShow(true);
+		fetchRooms();
 	};
 
 	return (
 		<div>
-			<Button variant="primary" onClick={rentNow}>
-				Rent Now
-			</Button>
-			<Modal show={show} onHide={() => setShow(false)}>
-				<Modal.Header>
-					<Modal.Title>{"Rent A Room Now"}</Modal.Title>
-				</Modal.Header>
-				<Modal.Body>
-					<Form>
-						<Form.Group controlId="name" aria-required>
-							<Form.Label>Name</Form.Label>
-							<Form.Control
-								type="text"
-								placeholder="Enter your name"
-								value={name}
-								onChange={(event) => setName(event.target.value)}
-							/>
-						</Form.Group>
-
-						<Form.Group controlId="hotel" aria-required>
-							<Form.Label>Hotel ID</Form.Label>
-							<Form.Control
-								type="number"
-								placeholder="Enter the hotel id"
-								value={hotel}
-								onChange={(event) => setHotel(event.target.value)}
-							/>
-						</Form.Group>
-
-						<Form.Group controlId="room" aria-required>
-							<Form.Label>Room ID</Form.Label>
-							<Form.Control
-								type="number"
-								placeholder="Enter the room id"
-								value={room}
-								onChange={(event) => setRoom(event.target.value)}
-							/>
-						</Form.Group>
-
-						<Form.Group controlId="price" aria-required>
-							<Form.Label>Price</Form.Label>
-							<Form.Control
-								type="number"
-								placeholder="Enter the price"
-								value={price}
-								onChange={(event) => setPrice(event.target.value)}
-							/>
-						</Form.Group>
-
-						<Form.Group controlId="startDate" aria-required>
-							<Form.Label>Start Date</Form.Label>
-							<Form.Control
-								type="date"
-								value={startDate}
-								onChange={(event) => setStartDate(event.target.value)}
-							/>
-						</Form.Group>
-
-						<Form.Group controlId="endDate" aria-required>
-							<Form.Label>End Date</Form.Label>
-							<Form.Control
-								type="date"
-								value={endDate}
-								onChange={(event) => setEndDate(event.target.value)}
-							/>
-						</Form.Group>
-					</Form>
-				</Modal.Body>
-				<Modal.Footer>
-					<Button variant="primary" onClick={handleSubmit}>
-						Rent Now
-					</Button>
-				</Modal.Footer>
-			</Modal>
+			<h1 className="mb-2 ml-3 mt-3">
+				<b>Rent Now</b>
+			</h1>
+			<h2 className="ml-3 mb-4">{`${rooms.length} Available Room(s)`}</h2>
+			{rooms.map((h, index) => {
+				return (
+					<Col md={6} lg={4} className="mb-4">
+						<Card>
+							<Card.Body>
+								<Card.Title>
+									<b>{`${h.Chain_Name} ${h.Category} Room #${h.Room_Number}`}</b>
+								</Card.Title>
+								<Card.Text>
+									<ul key={h.roomId}>
+										<li>Capacity: {h.Capacity}</li>
+										<li>Price: {`$${h.Price}`}</li>
+									</ul>
+								</Card.Text>
+								<Button variant="primary">Rent Now</Button>
+							</Card.Body>
+						</Card>
+					</Col>
+				);
+			})}
 		</div>
 	);
 }
