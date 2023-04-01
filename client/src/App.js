@@ -16,6 +16,7 @@ import Branches from "./components/HotelBranches/hotelBranches";
 import Bookings from "./components/Bookings/bookings";
 import Rentings from "./components/Rentings/rentings";
 import Profile from "./components/Profile/profile";
+import Rent from "./components/Rent/rent";
 
 function App() {
 	const [user, setUser] = useState({

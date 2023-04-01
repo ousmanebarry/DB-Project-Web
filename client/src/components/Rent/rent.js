@@ -6,6 +6,8 @@ function Rentings() {
 	const [rentings, setRentings] = useState([]);
 	const [show, setShow] = useState(false);
 	const [renting, setRenting] = useState({});
+	const [startDate, setStartDate] = useState({});
+	const [endDate, setEndDate] = useState({});
 
 	const [name, setName] = useState("");
 	const [cardNumber, setCardNumber] = useState("");
@@ -49,13 +51,13 @@ function Rentings() {
 		fetchRentings();
 	};
 
+	const rentNow = () => {
+		setShow(true);
+	};
+
 	return (
 		<div>
-			{rentings.map((b, index) => {
-				return (
-					
-				);
-			})}
+			<Button variant="primary" onClick={rentNow}></Button>
 			<Modal show={show} onHide={() => setShow(false)}>
 				<Modal.Header>
 					<Modal.Title>{`${renting.Chain_Name} ${renting.Category} Room #${renting.Room_Number}`}</Modal.Title>
@@ -77,7 +79,7 @@ function Rentings() {
 							<Form.Control
 								type="date"
 								value={startDate}
-								onChange={(event) => setExpirationDate(event.target.value)}
+								onChange={(event) => setStartDate(event.target.value)}
 							/>
 						</Form.Group>
 
@@ -86,11 +88,9 @@ function Rentings() {
 							<Form.Control
 								type="date"
 								value={endDate}
-								onChange={(event) => setExpirationDate(event.target.value)}
+								onChange={(event) => setEndDate(event.target.value)}
 							/>
 						</Form.Group>
-
-						
 					</Form>
 				</Modal.Body>
 				<Modal.Footer>
