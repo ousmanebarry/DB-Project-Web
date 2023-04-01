@@ -32,7 +32,9 @@ function Rentings() {
 		setShow(true);
 	};
 
-	const handleSubmit = () => {};
+	const handleSubmit = () => {
+		console.log("test");
+	};
 
 	return (
 		<div>
@@ -63,7 +65,7 @@ function Rentings() {
 					<Modal.Title>{`${renting.Chain_Name} ${renting.Category} Room #${renting.Room_Number}`}</Modal.Title>
 				</Modal.Header>
 				<Modal.Body>
-					<Form onSubmit={handleSubmit}>
+					<Form>
 						<Form.Group controlId="name" aria-required>
 							<Form.Label>Name</Form.Label>
 							<Form.Control
@@ -105,7 +107,9 @@ function Rentings() {
 					</Form>
 				</Modal.Body>
 				<Modal.Footer>
-					<Button variant="primary">Pay For Room</Button>
+					<Button variant="primary" onClick={handleSubmit}>
+						Pay For Room
+					</Button>
 				</Modal.Footer>
 			</Modal>
 		</div>
