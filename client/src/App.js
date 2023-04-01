@@ -55,20 +55,18 @@ function App() {
 						<Rentings />
 						<Footer />
 					</Route>
-
 					<Route exact path="/employee/rentnow">
 						<Navbar
 							List={[
 								{ display: "Booking", path: "/employee/bookings" },
 								{ display: "Renting", path: "/employee/rentings" },
-								{ display: "Profile", path: "/employee/profile" },
 								{ display: "Renting Now", path: "/employee/rentings/rentnow" },
+								{ display: "Profile", path: "/employee/profile" },
 							]}
 						/>
 						<Rent />
 						<Footer />
 					</Route>
-
 					<Route exact path="/employee/profile">
 						<Navbar
 							List={[

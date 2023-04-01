@@ -57,7 +57,7 @@ function Rentings() {
 
 	return (
 		<div>
-			<Button variant="primary" onClick={rentNow}></Button>
+			<Button variant="primary" onClick={rentNow}>Rent Now</Button>
 			<Modal show={show} onHide={() => setShow(false)}>
 				<Modal.Header>
 					<Modal.Title>{`${renting.Chain_Name} ${renting.Category} Room #${renting.Room_Number}`}</Modal.Title>
