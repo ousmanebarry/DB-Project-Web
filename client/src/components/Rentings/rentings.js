@@ -1,4 +1,3 @@
-import "./rentings.css";
 import React, { useState, useEffect } from "react";
 import { Row, Col, Form, Card, Button, Modal } from "react-bootstrap";
 

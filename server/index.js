@@ -1,6 +1,5 @@
 import express from "express";
 import cors from "cors";
-import { verifyToken } from "./verify.js";
 import authRoutes from "./routes/auth.js";
 import profileRoute from "./routes/profile.js";
 import bookingsRoute from "./routes/bookings.js";
