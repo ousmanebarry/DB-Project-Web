@@ -45,15 +45,13 @@ function Rentings() {
 									<b>{`${b.Full_name}`}</b>
 								</Card.Title>
 								<Card.Text>
-									<b>{`${b.Chain_Name} ${b.Category} Room #${b.Room_Number}`}</b>
-									<ul key={b.roomId}>
-										<li>First_Days: {b.First_Day}</li>
-										<li>Last_Day: {b.Last_Day}</li>
-										<li>Price: {`$${b.Price}`}</li>
-									</ul>
+									<h4>{`${b.Chain_Name} ${b.Category} Room #${b.Room_Number}`}</h4>
+									<p>First Day: {b.First_Day.split("T")[0]}</p>
+									<p>Last Day: {b.Last_Day.split("T")[0]}</p>
+									<p>Price: {`$${b.Price}`}</p>
 								</Card.Text>
 								<Button variant="primary" onClick={() => handleShow(index)}>
-									Pay
+									Pay For Room
 								</Button>
 							</Card.Body>
 						</Card>
@@ -104,10 +102,6 @@ function Rentings() {
 								onChange={(event) => setCvc(event.target.value)}
 							/>
 						</Form.Group>
-
-						<Button variant="primary" type="submit" className="mt-3">
-							Pay
-						</Button>
 					</Form>
 				</Modal.Body>
 				<Modal.Footer>

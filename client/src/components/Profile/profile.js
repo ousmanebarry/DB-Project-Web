@@ -29,12 +29,10 @@ function Profile() {
 							<b>{`${profile.Full_Name}`}</b>
 						</Card.Title>
 						<Card.Text>
-							<ul>
-								<li>Chain_Name: {profile.Chain_Name}</li>
-								<li>Position: {profile.Position}</li>
-								<li>SIN: {profile.SIN}</li>
-								<li>Address: {profile.Address}</li>
-							</ul>
+							<p>Chain Name: {profile.Chain_Name}</p>
+							<p>Position: {profile.Position}</p>
+							<p>SIN: {profile.SIN}</p>
+							<p>Home Address: {profile.Address}</p>
 						</Card.Text>
 					</Card.Body>
 				</Card>
