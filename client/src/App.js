@@ -30,19 +30,19 @@ function App() {
 				<Switch>
 					
 				<Route exact path="/employee/bookings">
-						<Navbar List={[{ display: "Booking", path: "/employee/booking" },{ display: "Renting", path: "/employee/renting" }, { display: "Profile", path: "/employee/profile" }]} />
+						<Navbar List={[{ display: "Booking", path: "/employee/bookings" },{ display: "Renting", path: "/employee/rentings" }, { display: "Profile", path: "/employee/profile" }]} />
 						<Bookings />
 						<Footer />
 					</Route>
 					
 					<Route exact path="/employee/rentings">
-						<Navbar List={[{ display: "Booking", path: "/employee/booking" },{ display: "Renting", path: "/employee/renting" }, { display: "Profile", path: "/employee/profile" }]} />
+						<Navbar List={[{ display: "Booking", path: "/employee/bookings" },{ display: "Renting", path: "/employee/rentings" }, { display: "Profile", path: "/employee/profile" }]} />
 						
 						<Footer />
 					</Route>
 
 					<Route exact path="/employee/profile">
-						<Navbar List={[{ display: "Booking", path: "/employee/booking" },{ display: "Renting", path: "/employee/renting" }, { display: "Profile", path: "/employee/profile" }]} />
+						<Navbar List={[{ display: "Booking", path: "/employee/bookings" },{ display: "Renting", path: "/employee/rentings" }, { display: "Profile", path: "/employee/profile" }]} />
 						
 						<Footer />
 					</Route>
