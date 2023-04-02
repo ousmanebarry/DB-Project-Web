@@ -15,7 +15,7 @@ password="<password>"
 database="hotel_management"
 ```
 
-Replace `user` and `password` with your database user and password information
+Replace `<user>` and `<password>` with your database user and password information
 
 # How to run
 
